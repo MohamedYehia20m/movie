@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "movies")
 public class Movie {
 
     @JsonProperty("Title")
@@ -40,6 +40,7 @@ public class Movie {
     private String actors;
 
     @JsonProperty("Plot")
+    @Column(length = 1000)
     private String plot;
 
     @JsonProperty("Language")

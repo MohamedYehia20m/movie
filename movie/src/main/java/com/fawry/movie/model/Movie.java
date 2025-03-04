@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fawry.movie.utils.Rating;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.List;
 
 @Data
@@ -57,6 +56,11 @@ public class Movie {
 
     @JsonProperty("Ratings")
     @ElementCollection
+    @CollectionTable(name = "ratings", joinColumns = @JoinColumn(name = "movie_imdbID"))
+    @AttributeOverrides(value = {
+            @AttributeOverride(name = "source", column = @Column(name = "source")),
+            @AttributeOverride(name = "value", column = @Column(name = "value"))}
+    )
     private List<Rating> ratings;
 
     @JsonProperty("Metascore")

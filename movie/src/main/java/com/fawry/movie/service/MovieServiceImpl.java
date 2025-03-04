@@ -5,6 +5,8 @@ import com.fawry.movie.repository.MovieRepository;
 import lombok.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @Service
 public class MovieServiceImpl implements MovieService {
     private final MovieRepository movieRepository;
+    private static final Logger logger = LoggerFactory.getLogger(MovieServiceImpl.class);
 
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
@@ -32,6 +35,9 @@ public class MovieServiceImpl implements MovieService {
         // call the api and get the movie data
         RestTemplate restTemplate = new RestTemplate();
         Movie movie = restTemplate.getForObject(url, Movie.class);
+
+        // Log the response
+        logger.debug("OMDB API response: {}", movie);
 
         if (movie != null && "True".equalsIgnoreCase(movie.getResponse())) {
             return movieRepository.save(movie);

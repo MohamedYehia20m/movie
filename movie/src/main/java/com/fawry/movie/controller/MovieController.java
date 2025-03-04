@@ -1,19 +1,15 @@
 package com.fawry.movie.controller;
 
-
 import com.fawry.movie.model.Movie;
-import com.fawry.movie.service.MovieService;
 import com.fawry.movie.service.MovieServiceImpl;
 import lombok.*;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/movies")
 public class MovieController {
-
     private final MovieServiceImpl movieServiceImpl;
 
     @GetMapping

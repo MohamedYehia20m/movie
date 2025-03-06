@@ -2,6 +2,7 @@ package com.fawry.movie.controller;
 
 import com.fawry.movie.model.Movie;
 import com.fawry.movie.service.MovieServiceImpl;
+import com.fawry.movie.utils.OMDBSearchResponse;
 import lombok.*;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -25,6 +26,11 @@ public class MovieController {
     @GetMapping("/{title}/{year}")
     public Movie getMovieByTitleAndYear(@PathVariable String title , @PathVariable String year) {
         return movieServiceImpl.getMovieByTitleAndYear(title, year);
+    }
+
+    @GetMapping("/search/{title}")
+    public OMDBSearchResponse searchMovieByTitle_OMDB(@PathVariable String title) {
+        return movieServiceImpl.searchMovieByTitle_OMDB(title);
     }
 
     @PostMapping("/{imdbID}")

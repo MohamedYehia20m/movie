@@ -1,10 +1,8 @@
 package com.fawry.movie.service;
 
 import com.fawry.movie.model.Movie;
-import org.springframework.web.client.RestTemplate;
-
+import com.fawry.movie.utils.OMDBSearchResponse;
 import java.util.List;
-import java.util.Optional;
 
 public interface MovieService {
     List<Movie> getAllMovies();
@@ -12,6 +10,8 @@ public interface MovieService {
     Movie getMovieByImdbID(String imdbID);
 
     Movie getMovieByTitleAndYear(String title , String year);
+
+    OMDBSearchResponse searchMovieByTitle_OMDB(String title);
 
     Movie addMovieByImdbID(String imdbID);
 

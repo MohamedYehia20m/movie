@@ -2,12 +2,12 @@ package com.fawry.movie.service;
 
 import com.fawry.movie.model.Movie;
 import com.fawry.movie.repository.MovieRepository;
+import com.fawry.movie.utils.OMDBSearchResponse;
 import lombok.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -26,6 +26,21 @@ public class MovieServiceImpl implements MovieService {
 
     public Movie getMovieByTitleAndYear(String title , String year) {
         return movieRepository.findByTitleAndYear(title , year);
+    }
+
+    public OMDBSearchResponse searchMovieByTitle_OMDB(String title) {
+        String apikey = "d6ee1b2f";
+        String url = "http://www.omdbapi.com/?apikey=" + apikey + "&s=" + title + "&plot=full";
+
+        // call the api and get the search data list
+        RestTemplate restTemplate = new RestTemplate();
+        OMDBSearchResponse response = restTemplate.getForObject(url, OMDBSearchResponse.class);
+
+        if (response != null && "True".equalsIgnoreCase(response.getResponse())) {
+            return response;
+        } else {
+            return new OMDBSearchResponse();
+        }
     }
 
     public Movie addMovieByImdbID(String imdbID) {

@@ -43,6 +43,44 @@ public class MovieServiceImpl implements MovieService {
         }
     }
 
+    public Movie getMovieByImdbID_OMDB(String imdbID) {
+        String apikey = "d6ee1b2f";
+        String url = "http://www.omdbapi.com/?apikey=" + apikey + "&i=" + imdbID + "&plot=full";
+
+        // call the api and get the movie data
+        RestTemplate restTemplate = new RestTemplate();
+        Movie movie = restTemplate.getForObject(url, Movie.class);
+
+        // Log the response
+        logger.debug("OMDB API response: {}", movie);
+
+        if (movie != null && "True".equalsIgnoreCase(movie.getResponse())) {
+            return movie;
+        } else {
+            throw new IllegalArgumentException("Invalid movie data");
+        }
+    }
+
+    public Movie getMovieByTitleAndYear_OMDB(String title, String year) {
+        String apikey = "d6ee1b2f";
+        String url = "http://www.omdbapi.com/?apikey=" + apikey + "&t=" + title + "&y=" + year+"&plot=full";
+
+        // call the api and get the movie data
+        RestTemplate restTemplate = new RestTemplate();
+        Movie movie = restTemplate.getForObject(url, Movie.class);
+
+        // Log the response
+        logger.debug("OMDB API response: {}", movie);
+
+        if (movie != null && "True".equalsIgnoreCase(movie.getResponse())) {
+            return movie;
+        }
+        else {
+            throw new IllegalArgumentException("Invalid movie data");
+        }
+
+    }
+
     public Movie addMovieByImdbID(String imdbID) {
         String apikey = "d6ee1b2f";
         String url = "http://www.omdbapi.com/?apikey=" + apikey + "&i=" + imdbID + "&plot=full";

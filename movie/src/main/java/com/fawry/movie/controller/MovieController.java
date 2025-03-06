@@ -18,19 +18,29 @@ public class MovieController {
         return movieServiceImpl.getAllMovies();
     }
 
-    @GetMapping("/{imdbID}")
+    @GetMapping("/db/{imdbID}")
     public Movie getMovieByImdbID(@PathVariable String imdbID) {
         return movieServiceImpl.getMovieByImdbID(imdbID);
     }
 
-    @GetMapping("/{title}/{year}")
+    @GetMapping("/db/{title}/{year}")
     public Movie getMovieByTitleAndYear(@PathVariable String title , @PathVariable String year) {
         return movieServiceImpl.getMovieByTitleAndYear(title, year);
     }
 
-    @GetMapping("/search/{title}")
+    @GetMapping("/omdb/search/{title}")
     public OMDBSearchResponse searchMovieByTitle_OMDB(@PathVariable String title) {
         return movieServiceImpl.searchMovieByTitle_OMDB(title);
+    }
+
+    @GetMapping("/omdb/{imdbID}")
+    public Movie getMovieByImdbID_OMDB(@PathVariable String imdbID) {
+        return movieServiceImpl.getMovieByImdbID_OMDB(imdbID);
+    }
+
+    @GetMapping("/omdb/{title}/{year}")
+    public Movie getMovieByTitleAndYear_OMDB(@PathVariable String title , @PathVariable String year) {
+        return movieServiceImpl.getMovieByTitleAndYear_OMDB(title, year);
     }
 
     @PostMapping("/{imdbID}")

@@ -13,6 +13,10 @@ public interface MovieService {
 
     OMDBSearchResponse searchMovieByTitle_OMDB(String title);
 
+    Movie getMovieByImdbID_OMDB(String imdbID);
+
+    Movie getMovieByTitleAndYear_OMDB(String title , String year);
+
     Movie addMovieByImdbID(String imdbID);
 
     Movie addMovieByTitleAndYear(String title, String year);
